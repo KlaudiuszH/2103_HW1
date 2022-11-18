@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homework 1: Tasks for kdh10</title>
+</head>
+
+<body>
+<h1>Homework 1: Tasks for kdh10</h1>
+
+<p>Your personal task is to develop a system for teams and their players.</p>
+
+<h2>Task 1: Configuration [4 marks]</h2>
+<p>Configure the project to support the use of JSPs as view technology. JSPs must be configured to be placed inside folder <code>src/main/webapp/WEB-INF/views/</code>.</p>
+
+<h2>Task 2: Domain Classes [13 marks]</h2>
+
+<p>Create class <code>co2103.hw1.domain.Player</code>. With the following private fields:
+<ol>
+  <li><code>String name</code></li>
+  <li><code>String nationality</code></li>
+  <li><code>String position</code></li>
+  <li><code>int age</code></li>
+</ol>
+Generate necessary getters and setters. [7 marks]
+</p>
+
+<p>Create class <code>co2103.hw1.domain.Team</code>. With the following private fields:
+<ol>
+  <li><code>int id</code></li>
+  <li><code>String name</code></li>
+  <li><code>String league</code></li>
+  <li><code>List&lt;Player&gt; players</code></li>
+</ol>
+Generate necessary getters and setters. [6 marks]
+</p>
+
+
+<h2>Task 3: Controller (simple) [5 marks]</h2>
+<p>Create controller <code>co2103.hw1.controller.MainController</code> [2 marks].
+<ol>
+  <li>Requests for URL <code>"/"</code> (POST and GET) should show the view <code>start</code> (the corresponding JSP already exists). [3 marks]</li>
+</ol>
+</p>
+
+<h2>Task 4: Controller, View, and Form [20 marks]</h2>
+
+<p>Create field <code>public static List&lt;Team&gt; teams</code> in class <code>co2103.hw1.Hw1Application</code>. Initialize the list inside class <code>co2103.hw1.Hw1Application</code> to contain one team with two players. [4 marks]</p>
+
+<p>Create controller <code>co2103.hw1.controller.TeamController</code> and add methods with request mappings for the following behavior:
+<ol>
+  <li>GET requests for URL <code>"/teams"</code> should show view <code>teams/list</code>. [2 marks]
+    <ul>
+      <li>Add the list of all teams from <code>co2103.hw1.Hw1Application</code> to the model as attribute <code>teams</code>. [2 marks]</li>
+      <li>Create the corresponding JSP to list the name and league of each team followed by a link to URL <code>"/players?team={id of team}"</code>, e.g., <code>"/players?team=3"</code>. [4 marks]</li>
+    </ul>
+  </li>
+  <li>Requests for URL <code>"/newTeam"</code> should show view <code>teams/form</code>. [3 marks] Create the corresponding JSP with a form with <code>modelAttribute="team"</code> and <code>action="/addTeam"</code> and inputs for all fields of class <code>Team</code> except for <code>players</code>. [5 marks]</li>
+  <li>POST requests for URL <code>"/addTeam"</code> should add a new team to the list of all teams in <code>co2103.hw1.Hw1Application</code> and redirect to <code>/teams</code>. [3 marks]</li>
+</ol>
+</p>
+
+<h2>Task 5: Controller, View, and Form with additional Parameter [33 marks]</h2>
+
+<p>Create controller <code>co2103.hw1.controller.PlayerController</code> and add methods with request mappings for the following behavior:
+<ol>
+  <li>GET requests for URL <code>"/players"</code> should show view <code>players/list</code>. [2 marks]
+    <ul>
+      <li>Based on request parameter <code>team</code> determine the corresponding team from <code>co2103.hw1.Hw1Application</code>. [2 marks]</li>
+      <li>Add the list of all players of that team to the model as attribute <code>players</code>. [2 marks]</li>
+      <li>Create the corresponding JSP for the view to list the name, nationality, position, and age of each player. [4 marks]</li>
+      <li>At the end of the list in the JSP add a link to URL <code>"/newPlayer?team={id of team whose players are listed}"</code>, e.g., <code>"/newPlayer?team=3"</code>. [4 marks]</li>
+    </ul>
+  </li>
+  <li>Requests for URL <code>"/newPlayer"</code> should show view <code>players/form</code>. [3 marks]
+    <ul>
+      <li>Create the corresponding JSP with a form with <code>modelAttribute="player"</code> and <code>action="/addPlayer"</code> and inputs for all fields of class <code>Player</code>. [6 marks]</li>
+      <li>Also add the request parameter <code>team</code> with the ID of the current team. [4 marks]</li>
+    </ul>
+  </li>
+  <li>POST requests for URL <code>"/addPlayer"</code> should add a new player to the list of players of the team identified by request parameter <code>team</code> and then redirect to <code>/teams</code>. [6 marks]</li>
+</ol>
+</p>
+
+<h2>Task 6: Validation [25 marks]</h2>
+
+<p>Set up a validator for class <code>Team</code> and make it available in controller <code>TeamController</code>. [4 marks]</p>
+<p>When adding a new team validate that
+  <ol>
+    <li>The value of field <code>id</code> is unique within the list <code>Hw1Application.teams</code>. [3 marks]</li>
+    <li>The value of field <code>name</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>league</code> is not empty. [2 marks]</li>
+  </ol>
+  In case of validation errors go back to the form and show error messages for each field in the form.
+</p>
+
+
+<p>Set up a validator for class <code>Player</code> and make it available in controller <code>PlayerController</code>. [4 marks]</p>
+<p>When adding a new player validate that
+  <ol>
+    <li>The value of field <code>name</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>nationality</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>position</code> is either <code>"Defence"</code>, <code>"Attack"</code>, or <code>"Goalkeeper"</code>. [3 marks]</li>
+    <li>The value of field <code>age</code> is between (including) 18 and 90. [3 marks]</li>
+  </ol>
+  In case of validation errors go back to the form and show error messages for each field in the form.
+</p>
+
+</body>
+
+</html>
