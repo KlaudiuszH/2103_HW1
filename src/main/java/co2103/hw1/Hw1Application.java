@@ -27,7 +27,6 @@ public class Hw1Application {
             player2.setPosition("Defender");
             player2.setAge(19);
 
-            //List<Player> players = new ArrayList<>();
             players.add(player1);
             players.add(player2);
 

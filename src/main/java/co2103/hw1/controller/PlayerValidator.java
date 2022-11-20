@@ -5,6 +5,10 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PlayerValidator implements Validator{
     @Override
     public boolean supports(Class<?> clazz) {
@@ -15,12 +19,16 @@ public class PlayerValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nationality", "","Nationality cannot be empty");
 
         Player player = (Player) target;
+
+        List<String> positions = new ArrayList<>(Arrays.asList("Defence", "Striker","Goalkeeper"));
+        if (!positions.contains(player.getPosition())) {
+            errors.rejectValue("position", "", "Invalid position");
+        }
+
         if (player.getAge() < 18 || player.getAge() > 90){
             errors.rejectValue("age", "", "Invalid Age");
         }
 
-        if (player.getPosition().equals("Defence") || player.getPosition().equals("Attack") || player.getPosition().equals("Goalkeeper") ) {
-            errors.rejectValue("position", "", "Invalid position");
-        }
+
     }
 }
