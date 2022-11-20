@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 
 @Controller
@@ -39,19 +38,12 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-    public String updatePlayer(@Valid @ModelAttribute Player player, @RequestParam int team, BindingResult result, Model model) {
-        if (result.hasErrors()){
-            model.addAttribute("player", new Player());
-            model.addAttribute("team", team);
-            return "players/form";
-        }
-
+    public String updatePlayer(@ModelAttribute Player player, @RequestParam int team) {
         for (Team list : Hw1Application.teams) {
             if (team == list.getId()) {
                 list.getPlayers().add(player);
             }
         }
-
         return "redirect:/teams";
     }
 }

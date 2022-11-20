@@ -12,5 +12,15 @@ public class PlayerValidator implements Validator{
     @Override
     public void validate(Object target, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "","Name cannot be empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nationality", "","Nationality cannot be empty");
+
+        Player player = (Player) target;
+        if (player.getAge() < 18 || player.getAge() > 90){
+            errors.rejectValue("age", "", "Invalid Age");
+        }
+
+        if (player.getPosition().equals("Defence") || player.getPosition().equals("Attack") || player.getPosition().equals("Goalkeeper") ) {
+            errors.rejectValue("position", "", "Invalid position");
+        }
     }
 }
