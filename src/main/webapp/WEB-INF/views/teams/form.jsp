@@ -10,14 +10,14 @@
 
 <form:form action="/addTeam" modelAttribute="team">
     <form:label path="id"> Enter team ID </form:label>
-    <form:input path="id"/><br/>
-
+    <form:input path="id"/>
+    <form:errors path="id"/><br/><br/>
     <form:label path="name"> Enter team name </form:label>
-    <form:input path="name"/><br/>
-
+    <form:input path="name"/>
+    <form:errors path="name"/><br/><br/>
     <form:label path="league"> Enter league </form:label>
-    <form:input path="league"/><br/>
-
+    <form:input path="league"/>
+    <form:errors path="league"/><br/><br/>
     <input type="submit"/>
 
 </form:form>

@@ -5,11 +5,20 @@ import co2103.hw1.domain.Player;
 import co2103.hw1.domain.Team;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerMapping;
+
+import javax.naming.Binding;
+import javax.validation.Valid;
 
 @Controller
 public class PlayerController {
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder){
+        binder.addValidators(new PlayerValidator());
+    }
 
     @GetMapping("/players")
     public String showPlayers(Model model, @RequestParam int team) {
@@ -30,7 +39,13 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-    public String updatePlayer(@ModelAttribute Player player, @RequestParam int team) {
+    public String updatePlayer(@Valid @ModelAttribute Player player, @RequestParam int team, BindingResult result, Model model) {
+        if (result.hasErrors()){
+            model.addAttribute("player", new Player());
+            model.addAttribute("team", team);
+            return "players/form";
+        }
+
         for (Team list : Hw1Application.teams) {
             if (team == list.getId()) {
                 list.getPlayers().add(player);

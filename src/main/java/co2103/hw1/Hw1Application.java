@@ -22,10 +22,10 @@ public class Hw1Application {
             player1.setAge(19);
 
             Player player2 = new Player();
-            player2.setName("John Smith");
+            player2.setName("Alex Martin");
             player2.setNationality("English");
             player2.setPosition("Defender");
-            player2.setAge(21);
+            player2.setAge(19);
 
             //List<Player> players = new ArrayList<>();
             players.add(player1);
