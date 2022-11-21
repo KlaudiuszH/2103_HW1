@@ -39,23 +39,19 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-<<<<<<< HEAD
     public String updatePlayer(@Valid @ModelAttribute Player player, BindingResult result, @RequestParam(value = "team") int team, Model model) {
-        if(result.hasErrors()) {
-            model.addAttribute("team", team);
-=======
-    public String updatePlayer(@Valid @ModelAttribute Player player, BindingResult result, @RequestParam int team) {
         if (result.hasErrors()) {
->>>>>>> c6f8520b6ca6b0fc56791d6dc964b587d34ff7ca
+            model.addAttribute("team", team);
             return "players/form";
         }
         for (Team i : Hw1Application.teams) {
             if (i.getId() == team) {
-                ArrayList<Player> players = new ArrayList<>(i.getPlayers());
-                players.add(player);
-                i.setPlayers(players);
+                    ArrayList<Player> players = new ArrayList<>(i.getPlayers());
+                    players.add(player);
+                    i.setPlayers(players);
             }
         }
         return "redirect:/teams";
+
     }
 }
