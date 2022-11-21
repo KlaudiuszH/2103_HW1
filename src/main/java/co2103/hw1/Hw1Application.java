@@ -24,10 +24,9 @@ public class Hw1Application {
             Player player2 = new Player();
             player2.setName("Alex Martin");
             player2.setNationality("English");
-            player2.setPosition("Defender");
+            player2.setPosition("Defence");
             player2.setAge(19);
 
-            //List<Player> players = new ArrayList<>();
             players.add(player1);
             players.add(player2);
 
