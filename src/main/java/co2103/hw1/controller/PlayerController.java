@@ -31,16 +31,16 @@ public class PlayerController {
     }
 
     @RequestMapping("/newPlayer")
-    public String newPlayer(Model model, @RequestParam int team) {
+    public String newPlayer(Model model, @RequestParam(value = "team") int team) {
         model.addAttribute("player", new Player());
         model.addAttribute("team", team);
         return("players/form");
     }
 
     @PostMapping("/addPlayer")
-    public String updatePlayer(@Valid @ModelAttribute Player player, @RequestParam int team, BindingResult result, Model model) {
+    public String updatePlayer(@Valid @ModelAttribute Player player, BindingResult result, @RequestParam(value = "team") int team, Model model) {
         if(result.hasErrors()) {
-            model.addAttribute("player", player);
+            model.addAttribute("team", team);
             return "players/form";
         }
         for(Team i : Hw1Application.teams) {

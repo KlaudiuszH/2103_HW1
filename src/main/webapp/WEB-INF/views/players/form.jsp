@@ -8,7 +8,7 @@
 <body>
 <h2>Add new player to a team</h2>
 
-<form:form action="/addPlayer" modelAttribute="player">
+<form:form action="/addPlayer?team=${team}" modelAttribute="player">
     <form:label path="name"> Enter player name </form:label>
     <form:input path="name"/>
     <form:errors path="name"/><br/><br/>
@@ -21,7 +21,6 @@
     <form:label path="age"> Enter player age </form:label>
     <form:input path="age"/>
     <form:errors path="age"/><br/><br/>
-    <input type="hidden" name="team" value="${team}"/>
 
     <input type="submit"/>
 
