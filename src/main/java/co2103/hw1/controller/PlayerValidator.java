@@ -24,7 +24,6 @@ public class PlayerValidator implements Validator{
         if (!positions.contains(player.getPosition())) {
             errors.rejectValue("position", "", "Invalid position");
         }
-
         if (player.getAge() < 18 || player.getAge() > 90){
             errors.rejectValue("age", "", "Invalid Age");
         }
